@@ -8,6 +8,7 @@ class CreateBooks < ActiveRecord::Migration
       t.string :image
       t.integer :YiBoNum
       t.string :keywords
+      t.integer :user_id
 
       t.timestamps null: false
     end
