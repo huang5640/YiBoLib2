@@ -33,6 +33,7 @@ class BooksController < ApplicationController
   end
 
   def checkingOut
+    p @user.id
     @book.update(user_id: @user.id)
     flash[:notice] = "图书已经借出"
     redirect_to books_path
