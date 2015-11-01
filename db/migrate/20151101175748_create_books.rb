@@ -4,9 +4,9 @@ class CreateBooks < ActiveRecord::Migration
       t.string :title
       t.string :author
       t.string :description
-      t.integer :ISBN
+      t.string :ISBN
       t.string :image
-      t.integer :YiBoNum
+      t.string :YiBoNum
       t.string :keywords
       t.integer :user_id
 
