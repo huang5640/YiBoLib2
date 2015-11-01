@@ -17,9 +17,9 @@ ActiveRecord::Schema.define(version: 20151101184829) do
     t.string   "title"
     t.string   "author"
     t.string   "description"
-    t.integer  "ISBN",        limit: 13
+    t.string  "ISBN",        limit: 13
     t.string   "image"
-    t.integer  "YiBoNum"
+    t.string  "YiBoNum"
     t.string   "keywords"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false

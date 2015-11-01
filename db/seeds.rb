@@ -17,7 +17,7 @@ User.create!([
 p "Created #{User.count} users"
 
 Book.create!([
-	{ title: "The Beauty", author: "Jason", description: "This is the first book.", ISBN: 1879238732211, image: "www.google.com"},
-	{ title: "The Good", author: "Jim", description: "This is the second book.", ISBN: 9113912739821, image: "www.baidu.com"},
-	{ title: "The Ugly", author: "Henry", description: "This the third book.", ISBN: 4671239812123, image: "www.yahoo.com"}])
+	{ title: "The Beauty", author: "Jason", description: "This is the first book.", ISBN: "1879238732211", image: "www.google.com"},
+	{ title: "The Good", author: "Jim", description: "This is the second book.", ISBN: "9113912739821", image: "www.baidu.com"},
+	{ title: "The Ugly", author: "Henry", description: "This the third book.", ISBN: "4671239812123", image: "www.yahoo.com"}])
 p "Created #{Book.count} books"
