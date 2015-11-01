@@ -12,21 +12,26 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :姓名 %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :GovID %><br>
+    <%= f.label :益博码 %><br>
+    <%= f.text_field :YiBoID %>
+  </div>
+  <div class="field">
+    <%= f.label :身份证号 %><br>
     <%= f.text_field :GovID %>
   </div>
   <div class="field">
-    <%= f.label :address %><br>
+    <%= f.label :地址 %><br>
     <%= f.text_field :address %>
   </div>
   <div class="field">
-    <%= f.label :AuthNum %><br>
+    <%= f.label :权限 %><br>
     <%= f.number_field :AuthNum %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

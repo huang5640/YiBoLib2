@@ -20,6 +20,6 @@ class Book < ActiveRecord::Base
     def set_keywords
     	word = [title, author, description].join(' ')
     	#isbn = [Book.ISBN]
-        self.keywords = word
+      self.keywords = word
     end
 end

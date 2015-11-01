@@ -1,31 +1,36 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>姓名:</strong>
   <%= @user.name %>
 </p>
 
 <p>
-  <strong>Govid:</strong>
+  <strong>身份证号:</strong>
   <%= @user.GovID %>
 </p>
 
 <p>
-  <strong>Address:</strong>
+  <strong>地址:</strong>
   <%= @user.address %>
 </p>
 
 <p>
-  <strong>Authnum:</strong>
+  <strong>权限:</strong>
   <%= @user.AuthNum %>
 </p>
 
 <p>
-  <strong>Books:</strong>
+  <strong>益博码：</strong>
+  <%= @user.YiBoID%>
+</p>
+
+<p>
+  <strong>已借:</strong>
   <%= @user.books.each do |book| %>
     <%= link_to book.title, book_path(book) %>
   <% end %>  
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to '编辑', edit_user_path(@user) %> |
+<%= link_to '返回主页', books_path %>

@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy, :destroy, :checkIn, :checkOut, :checkingOut]
-  before_action :set_user, only: [:checkOut, :checkingOut]
+  before_action :set_user, only: [:checkOut, :checkingOut, :checkIn]
   before_action :set_new_book, only: [:new, :registerBook]
   helper :all
 
@@ -26,14 +26,14 @@ class BooksController < ApplicationController
   end
 
   def checkIn
-    @book.update(:user_id => nil)
+    @book.update!(user_id: nil)
 
-    flash[:notice] = "图书已经归库"
+    flash[:notice] = "#{@user.name}已经将#{@book.title}归还"
     redirect_to books_path
   end
 
   def checkingOut
-    @book.update(:user_id => @user.id)
+    @book.update(user_id: @user.id)
     flash[:notice] = "图书已经借出"
     redirect_to books_path
   end
@@ -88,7 +88,11 @@ class BooksController < ApplicationController
     end
 
     def set_user
-      @user = User.find_by(YiBoID: params[:YiBoID])
+      if params[:YiBoID] 
+        @user = User.find_by(YiBoID: params[:YiBoID])
+      else
+        @user = Book.find_by(id: params[:id]).user
+      end
     end
 
     def set_new_book
