@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<strong>
+<%= link_to '录入新书', new_book_path %>
+</strong>
+
+<h1>书库</h1>
+
+  <div class='row'>
+    <div class='col-sm-12'>
+      <p>
+        <form>
+          <legend>用ISBN搜索</legend>
+          <div class='col-xs-4'>
+            <input type='text' class='form-control' value='<%= params[:isbn] %>' name='isbn' placeholder='ISBN' >
+          </div>
+        </form>
+        <form>
+          <legend>搜索书名、作者或简介</legend>
+          <div class='col-xs-4'>
+            <input type='text' class='form-control' value='<%= params[:keyword] %>' name='keyword' placeholder='书名、作者或简介' >
+          </div>
+        </form>
+      </p>
+    </div>
+  </div>
+
+<%= render 'book'%>

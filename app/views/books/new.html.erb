@@ -1,0 +1,38 @@
+<h1>New Book</h1>
+
+<form>
+  <legend>ISBN码</legend>
+  <div>
+    <input type='search' value='<%= params[:isbn] %>' name='isbn' placeholder='请输入ISBN码'>
+  </div>
+</form>
+
+<% if @newBook["title"] %>
+	<%# Display the book here and let the admin to decide whether to add the book to system%>
+	
+	<table>
+		<thead>
+			<tr>
+				<th>image</th>
+				<th>标题</th>
+				<th>作者</th>
+				<th>ISBN码</th>
+				<th>内容简介</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr>
+				<td><%= @newBook["image"] %></td>
+				<td><%= @newBook["title"] %></td>
+				<td><%= @newBook["author"] %></td>
+				<td><%= @newBook["isbn13"] %></td>
+				<td><%= @newBook["summary"]%></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p><%= link_to "确认加入书库", registering_book_path(params[:isbn]), data: {confirm: "#{@newBook["title"]}将会加入书库"} %></p>
+<% end %>
+
+<%= link_to 'Back', books_path %>
