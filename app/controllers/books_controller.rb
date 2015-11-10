@@ -25,6 +25,7 @@ class BooksController < ApplicationController
 
   end
 
+  /check in and check out /
   def checkIn
     @book.update!(user_id: nil)
 
@@ -42,6 +43,7 @@ class BooksController < ApplicationController
   def checkOut
   end
 
+  /new book method/
   def registerBook
     @brandNewBook = Book.create({title: @newBook["title"], author: @newBook["author"], description: @newBook["summary"], ISBN: @newBook["isbn13"], image: @newBook["image"]})
     flash[:notice] = "#{@newBook["title"]}已经入库。"
@@ -65,7 +67,7 @@ class BooksController < ApplicationController
     def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: '用户资料已被更新' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -77,7 +79,7 @@ class BooksController < ApplicationController
   def destroy
     @book.destroy
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+      format.html { redirect_to books_url, notice: '成功删除书目' }
       format.json { head :no_content }
     end
   end
@@ -97,7 +99,7 @@ class BooksController < ApplicationController
     end
 
     def set_new_book
-      @newBook = Book.search_douban_by_isbn(params[:isbn])
+      @newBook = Book.search_douban_by_isbn(params[:isbn]) 
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

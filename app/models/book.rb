@@ -13,7 +13,7 @@ class Book < ActiveRecord::Base
 
   def self.search_douban_by_isbn term
 		add = "/isbn/#{term}"
-    get(add, query: {fields: "title,author,summary, isbn13, image"})
+    get(add, query: {fields: "title,author,summary,isbn13,image,msg"})
   end
 
 	protected

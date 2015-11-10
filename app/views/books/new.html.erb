@@ -9,7 +9,7 @@
 
 <% if @newBook["title"] %>
 	<%# Display the book here and let the admin to decide whether to add the book to system%>
-	
+	<p><%= @newBook["isbn13"]%></p>
 	<table>
 		<thead>
 			<tr>
@@ -23,7 +23,7 @@
 
 		<tbody>
 			<tr>
-				<td><%= @newBook["image"] %></td>
+				<td><%= image_tag @newBook["image"] %></td>
 				<td><%= @newBook["title"] %></td>
 				<td><%= @newBook["author"] %></td>
 				<td><%= @newBook["isbn13"] %></td>
@@ -33,6 +33,8 @@
 	</table>
 
 	<p><%= link_to "确认加入书库", registering_book_path(params[:isbn]), data: {confirm: "#{@newBook["title"]}将会加入书库"} %></p>
+<% elsif @newBook["msg"] %>
+	<p>书目不存在</p>>
 <% end %>
 
 <%= link_to 'Back', books_path %>

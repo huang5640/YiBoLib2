@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  #before_save :encrypt_password
+  #after_save :clear_password
   # GET /users
   # GET /users.json
   def index
@@ -10,6 +11,9 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+  end
+
+  def login
   end
 
   # GET /users/new
@@ -69,6 +73,17 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :GovID, :address, :AuthNum, :YiBoID)
+      params.require(:user).permit(:name, :GovID, :address, :AuthNum, :YiBoID, :password, :email)
+    end
+
+    def encrypt_password
+      if password.present?
+        self.salt = BCrypt::Engine.generate_salt
+        self.password = BCrypt::Engine.hash_secret(password, salt)
+      end
+    end
+
+    def clear_password
+      self.password = nil
     end
 end
