@@ -12,9 +12,9 @@ Rails.application.routes.draw do
   get "books/:id/checkOut/:YiBoID" => "books#checkingOut", as: 'checking_out'
   get "books/new/register/:isbn" => "books#registerBook", as: 'registering_book'
 
-  get 'login' => 'sessions#new'
-  post 'login' => 'sessions#create'
-  delete 'logout' => 'sessions#destroy'
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  delete '/logout' => 'sessions#destroy'
 
   root "sessions#new"
   # The priority is based upon order of creation: first created -> highest priority.

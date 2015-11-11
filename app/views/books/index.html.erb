@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <% if current_user %>
-  登陆用户：<%= current_user.name %> | <%= link_to "注销用户", '/logout'%>
+  登陆用户：<%= current_user.name %> | <%= link_to "注销用户", '/logout', :method => :delete%>
 <% end %>
 
 <strong>
