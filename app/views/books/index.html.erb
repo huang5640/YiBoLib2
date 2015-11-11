@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<% if current_user %>
+  登陆用户：<%= current_user.name %> | <%= link_to "注销用户", '/logout'%>
+<% end %>
+
 <strong>
 <%= link_to '录入新书', new_book_path %>
 </strong>

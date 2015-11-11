@@ -11,19 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151109205456) do
+ActiveRecord::Schema.define(version: 20151111043400) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
     t.string   "author"
     t.string   "description"
-    t.string   "ISBN",        limit: 13
+    t.string   "ISBN"
     t.string   "image"
     t.string   "YiBoNum"
     t.string   "keywords"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
     t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -32,9 +32,9 @@ ActiveRecord::Schema.define(version: 20151109205456) do
     t.string   "address"
     t.integer  "AuthNum"
     t.string   "YiBoID"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "password"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "password_digest"
     t.string   "userType"
     t.string   "email"
   end

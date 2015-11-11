@@ -1,0 +1,19 @@
+<% provide(:title, "Log in") %>
+<h1>Log in</h1>
+
+<p><%= flash[:danger]%></p>
+
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<%= form_for(:session, url: login_path) do |f| %>
+			<%= f.label :益博码 %>
+			<%= f.text_field :YiBoID, class: 'form-control'%>
+
+			<%= f.label :密码 %>
+			<%= f.password_field :password, class: "form-control" %>
+
+			<%= f.submit "Log in", class: "btn btn-primary" %>
+		<% end %>
+
+	</div>
+</div>

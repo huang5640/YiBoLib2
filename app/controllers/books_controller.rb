@@ -1,7 +1,8 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy, :destroy, :checkIn, :checkOut, :checkingOut]
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :checkIn, :checkOut, :checkingOut]
   before_action :set_user, only: [:checkOut, :checkingOut, :checkIn]
   before_action :set_new_book, only: [:new, :registerBook]
+  before_filter :authorize
   helper :all
 
   def index 
