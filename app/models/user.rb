@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-   attr_accessor :YiBoID
-
 	has_many :books
    has_secure_password
   
@@ -8,4 +6,9 @@ class User < ActiveRecord::Base
 	validates :YiBoID, presence: true, uniqueness: true
 	validates_format_of :email, :with => EMAIL_REGEX
 	#validates :password, length: { in: 6..20 }
+
+	def User.digest(string)
+	  cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+	  BCrypt::Password.create(string, cost: cost)
+	end
 end

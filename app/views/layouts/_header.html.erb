@@ -1,0 +1,8 @@
+<header>
+	<% if logged_in? %>
+	  <li><%= link_to "Users", '#' %></li>
+	  <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+	<% else %>
+	  <li><%= link_to "登陆", login_path%></li>
+	<% end %>
+</header>

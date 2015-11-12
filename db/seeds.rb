@@ -10,9 +10,9 @@ Book.destroy_all
 User.destroy_all
 
 User.create!([
-	{ YiBoID: "11111111", name: "Jax", GovID: "401213789123", address: "1075 Space Park Way, Mountain View, CA", AuthNum: 3, password_digest: "huangjiajun"},
-	{ YiBoID: "22222222", name: "Baby", GovID: "412378124891", address: "973 Dolors Ave, Los Altos, CA", AuthNum: 2, password_digest: "yubingting"},
-	{ YiBoID: "33333333", name: "Vincent", GovID: "1238973928111", address: "white house, WA", AuthNum: 5, password_digest: "hahahaha"}])
+	{ YiBoID: "11111111", name: "Jax", GovID: "401213789123", address: "1075 Space Park Way, Mountain View, CA", AuthNum: 3, password_digest: User.digest("huangjiajun")},
+	{ YiBoID: "22222222", name: "Baby", GovID: "412378124891", address: "973 Dolors Ave, Los Altos, CA", AuthNum: 2, password_digest: User.digest("yubingting")},
+	{ YiBoID: "33333333", name: "Vincent", GovID: "1238973928111", address: "white house, WA", AuthNum: 5, password_digest: User.digest("hahahaha")}])
 
 p "Created #{User.count} users"
 
