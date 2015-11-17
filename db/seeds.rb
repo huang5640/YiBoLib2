@@ -14,6 +14,18 @@ User.create!([
 	{ YiBoID: "22222222", name: "Baby", GovID: "412378124891", address: "973 Dolors Ave, Los Altos, CA", AuthNum: 2, password_digest: User.digest("yubingting")},
 	{ YiBoID: "33333333", name: "Vincent", GovID: "1238973928111", address: "white house, WA", AuthNum: 5, password_digest: User.digest("hahahaha")}])
 
+10.times do |n|
+  name = Faker::Name.name
+  yiboid = Faker::Number.number(8)
+  govid = Faker::Number.number(11)
+  add = Faker::Address.street_address
+  authnum = Faker::Number.number(1)
+  pw = 'password'
+
+  User.create!(name: name, YiBoID: yiboid, GovID: govid, address: add, AuthNum: authnum, password_digest: User.digest(pw))
+
+end
+
 p "Created #{User.count} users"
 
 Book.create!([

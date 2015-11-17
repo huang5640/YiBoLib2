@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   #before_save :encrypt_password
+  before_action :logged_in_user
+  before_action :correct_user, only: [:edit, :update, :destroy]
   #after_save :clear_password
+  include SessionsHelper
+
+
   # GET /users
   # GET /users.json
   def index
@@ -86,4 +91,17 @@ class UsersController < ApplicationController
     def clear_password
       self.password = nil
     end
+
+	 def logged_in_user
+	   unless logged_in?
+		  flash[:danger] = "请先登入!"
+		  redirect_to login_url
+		end
+	 end
+	 
+	 def correct_user
+	   @user = User.find(params[:id])
+		flash[:danger] = "权限不足"
+		redirect_to books_url unless current_user?(@user)
+	 end
 end
