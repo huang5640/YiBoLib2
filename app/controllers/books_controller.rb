@@ -10,11 +10,11 @@ class BooksController < ApplicationController
 
   def index 
     if params[:keyword]
-      @books = Book.search(params[:keyword])
+      @books = Book.search(params[:keyword]).paginate(page: params[:page], per_page: 10)
     elsif params[:isbn]
-      @books = Book.search_by_isbn(params[:isbn])
+      @books = Book.search_by_isbn(params[:isbn]).paginate(page: params[:page], per_page: 10)
     else
-      @books = Book.all
+      @books = Book.paginate(page: params[:page], per_page: 10)
     end
   end
 

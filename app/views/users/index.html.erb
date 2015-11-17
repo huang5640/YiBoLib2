@@ -2,6 +2,8 @@
 
 <h1>用户列表</h1>
 
+<%= will_paginate%>
+
 <table>
   <thead>
     <tr>
@@ -31,6 +33,8 @@
 </table>
 
 <br>
+
+<%= will_paginate%>
 
 <%= link_to "新增用户", new_user_path %>
 <%= link_to "返回主页", books_path %>

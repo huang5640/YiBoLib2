@@ -1,6 +1,7 @@
 class Book < ActiveRecord::Base
 	include HTTParty
 	belongs_to :user
+	belongs_to :location
 
 	scope :search, ->(keyword) { where('keywords LIKE ?', "%#{keyword.downcase}%") if keyword.present? }
 	scope :search_by_isbn, ->(isbn) {where('ISBN LIKE ?', "#{isbn}%") if isbn.present? }
