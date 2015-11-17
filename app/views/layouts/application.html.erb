@@ -7,6 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	  <% if current_user %>
+  登陆用户：<%= current_user.name %> | <%= link_to "注销用户", '/logout', :method => :delete%>
+<% end %>
       <%= yield %>
 </body>
 </html>
