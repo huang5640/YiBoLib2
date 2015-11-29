@@ -5,6 +5,7 @@ class Book < ActiveRecord::Base
 
 	scope :search, ->(keyword) { where('keywords LIKE ?', "%#{keyword.downcase}%") if keyword.present? }
 	scope :search_by_isbn, ->(isbn) {where('ISBN LIKE ?', "#{isbn}%") if isbn.present? }
+  scope :filter_by_location, ->(location_id) {where(location_id: location_id)}
 	before_save :set_keywords
 
 	api_key = '0087b8655dd56b660197293019804232'

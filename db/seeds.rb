@@ -38,7 +38,14 @@ isbn_array = [9787509776704, 9787544757225, 9787549567027, 9787550260474, 978751
 isbn_array.each do |isbn|
 book = Book.search_douban_by_isbn(isbn)
 		  Book.create!([
-								{title: book["title"], author: book["author"], description: book["summary"], ISBN: book["isbn13"], image: book["image"], location: Location.first }
+								{title: book["title"], author: book["author"], description: book["summary"], ISBN: book["isbn13"], image: book["image"], location: Location.order("RANDOM()").first }
 								])
 end
 p "Created #{Book.count} books"
+
+Manager.create!([
+  { user: User.first},
+  { user: User.second},
+  { user: User.third}])
+
+p "Created #{Manager.count} managers"

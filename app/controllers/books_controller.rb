@@ -2,19 +2,25 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy, :checkIn, :checkOut, :checkingOut]
   before_action :set_user, only: [:checkOut, :checkingOut, :checkIn]
   before_action :set_new_book, only: [:new, :registerBook]
-  before_action :logged_in_user
   before_filter :authorize
+
+  ##scope :distinct_book, { where("DISTINCT ISBN") }
   
   include SessionsHelper
   helper :all
 
   def index 
-    if params[:keyword]
-      @books = Book.search(params[:keyword]).paginate(page: params[:page], per_page: 10)
-    elsif params[:isbn]
-      @books = Book.search_by_isbn(params[:isbn]).paginate(page: params[:page], per_page: 10)
+    distinct_book = Book.group(:ISBN).paginate(page: params[:page], per_page: 10)
+    @locations = Location.all
+
+    if params[:keyword] ##search with keyword
+      @books = distinct_book.search(params[:keyword])
+    elsif params[:isbn] ##search with ISBN
+      @books = distinct_book.search_by_isbn(params[:isbn])
+    elsif params[:location_id] ##filter by location
+      @books = distinct_book.filter_by_location(params[:location_id])
     else
-      @books = Book.paginate(page: params[:page], per_page: 10)
+      @books = distinct_book
     end
   end
 
@@ -103,7 +109,7 @@ class BooksController < ApplicationController
     end
 
     def set_new_book
-      @newBook = Book.search_douban_by_isbn(params[:isbn]) 
+      @newBook = Book.search_douban_by_isbn(params[:isbn]) if params[:isbn]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
