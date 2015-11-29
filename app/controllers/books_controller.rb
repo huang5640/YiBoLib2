@@ -10,15 +10,15 @@ class BooksController < ApplicationController
   helper :all
 
   def index 
-    all_books = Book.paginate(page: params[:page], per_page: 10)
+    all_books = Book.order(:title).paginate(page: params[:page], per_page: 10)
     @locations = Location.all
 
     if params[:keyword] ##search with keyword
-      @books = all_books.search(params[:keyword]).distinct_book
+      @books = all_books.search(params[:keyword])
     elsif params[:isbn] ##search with ISBN
-      @books = all_books.search_by_isbn(params[:isbn]).distinct_book
+      @books = all_books.search_by_isbn(params[:isbn])
     elsif params[:location_id] ##filter by location
-      @books = all_books.filter_by_location(params[:location_id]).distinct_book
+      @books = all_books.filter_by_location(params[:location_id])
     else
       @books = all_books
     end
