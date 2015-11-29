@@ -41,6 +41,8 @@ book = Book.search_douban_by_isbn(isbn)
 								{title: book["title"], author: book["author"], description: book["summary"], ISBN: book["isbn13"], image: book["image"], location: Location.order("RANDOM()").first }
 								])
 end
+Book.create!([{title: Book.first["title"], author: Book.first["author"], description: Book.first["description"], ISBN: Book.first["ISBN"], image: Book.first["image"], location: Location.first }])
+Book.create!([{title: Book.first["title"], author: Book.first["author"], description: Book.first["description"], ISBN: Book.first["ISBN"], image: Book.first["image"], location: Location.second }])
 p "Created #{Book.count} books"
 
 Manager.create!([
