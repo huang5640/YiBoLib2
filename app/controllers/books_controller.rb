@@ -14,11 +14,11 @@ class BooksController < ApplicationController
     @locations = Location.all
 
     if params[:keyword] ##search with keyword
-      @books = all_books.search(params[:keyword]).group(:ISBN)
+      @books = all_books.search(params[:keyword]).distinct_book
     elsif params[:isbn] ##search with ISBN
-      @books = all_books.search_by_isbn(params[:isbn]).group(:ISBN)
+      @books = all_books.search_by_isbn(params[:isbn]).distinct_book
     elsif params[:location_id] ##filter by location
-      @books = all_books.filter_by_location(params[:location_id]).group(:ISBN)
+      @books = all_books.filter_by_location(params[:location_id]).distinct_book
     else
       @books = all_books
     end
