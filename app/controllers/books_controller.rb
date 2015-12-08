@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy, :checkIn, :checkOut, :checkingOut]
-  before_action :set_user, only: [:checkOut, :checkingOut, :checkIn]
+  before_action :set_user, only: [:registerBook, :checkOut, :checkingOut, :checkIn]
   before_action :set_new_book, only: [:new, :registerBook]
   before_filter :authorize
 
@@ -36,18 +36,34 @@ class BooksController < ApplicationController
   end
 
   /check in and check out /
+  def checking 
+  end
+
+  def checking_choose
+    @book = Book.find_by(YiBoNum: params[:YiBoNum])
+	 if @book
+	 	 if @book.user_id
+		 	redirect_to check_in_path(@book)
+		 else
+		   redirect_to check_out_path(@book)
+	    end
+	 else
+	 	flash[:notice] = "书不存在"
+	 end
+  end
+
   def checkIn
     @book.update!(user_id: nil)
 
     flash[:notice] = "#{@user.name}已经将#{@book.title}归还"
-    redirect_to books_path
+    redirect_to checking_book_path
   end
 
   def checkingOut
     p @user.id
     @book.update(user_id: @user.id)
     flash[:notice] = "图书已经借出"
-    redirect_to books_path
+    redirect_to checking_book_path
   end
 
   def checkOut
@@ -57,7 +73,7 @@ class BooksController < ApplicationController
   def registerBook
     @brandNewBook = Book.create({title: @newBook["title"], author: @newBook["author"], description: @newBook["summary"], ISBN: @newBook["isbn13"], image: @newBook["image"]})
     flash[:notice] = "#{@newBook["title"]}已经入库。"
-    redirect_to books_path
+    redirect_to new_path
   end
 
   def create

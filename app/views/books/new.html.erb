@@ -1,5 +1,7 @@
 <h1>录入新书</h1>
 
+<p><%= flash[:notice]%></p>
+
 <form>
   <legend>ISBN码</legend>
   <div>
@@ -33,7 +35,7 @@
 
 	<p><%= link_to "确认加入书库", registering_book_path(params[:isbn]), data: {confirm: "#{@newBook["title"]}将会加入书库"} %></p>
 <% elsif @newBook["msg"] %>
-	<p>书目不存在</p>>
+	<p>书目不存在</p>
 <% end %>
 <% end %>
 

@@ -5,13 +5,15 @@ Rails.application.routes.draw do
   resources :users
   resources :books
   get "books/index" => 'books#index'
-  get "books/new" => 'books#new'
+  get "books/new" => 'books#new', as: 'new'
   get "books/:id/edit" => 'books#edit'
   get "books/:id/" => "books#show"
   get "books/:id/checkIn" => "books#checkIn", as: 'check_in'
   get "books/:id/checkOut" => "books#checkOut", as: 'check_out'
   get "books/:id/checkOut/:YiBoID" => "books#checkingOut", as: 'checking_out'
   get "books/new/register/:isbn" => "books#registerBook", as: 'registering_book'
+  get "checking" => "books#checking", as: 'checking_book'
+  get "checking_choose" => "books#checking_choose", as: 'checking_choose'
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'

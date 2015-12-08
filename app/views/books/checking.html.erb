@@ -1,0 +1,10 @@
+<h1>借还</h1>
+<form>
+	<p><%= flash[:notice]%></p>
+	<legend>益博码</legend>
+	<div>
+		<input type='search' value='<%= params[:YiBoNum]%>' name = 'YiBoNum' placeholder='请输入益博码'>
+		<button><%= link_to "Submit", checking_choose_path%></button>
+	</div>
+	<%= link_to "Back", books_path %>
+</form>
