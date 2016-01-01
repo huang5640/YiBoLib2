@@ -1,4 +1,4 @@
-<h1>录入新书</h1>
+<h1 class="header">录入新书</h1>
 
 <p><%= flash[:notice]%></p>
 
@@ -8,6 +8,11 @@
     <input type='search' value='<%= params[:isbn] %>' name='isbn' placeholder='请输入ISBN码'>
   </div>
 </form>
+
+<%= link_to 'Back', books_path %>
+
+
+
 <% if @newBook %>
 <% if @newBook["title"] %>
 	<%# Display the book here and let the admin to decide whether to add the book to system%>
@@ -38,5 +43,3 @@
 	<p>书目不存在</p>
 <% end %>
 <% end %>
-
-<%= link_to 'Back', books_path %>
