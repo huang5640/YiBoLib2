@@ -36,10 +36,7 @@ p "Created #{User.count} users"
 
 isbn_array = [9787509776704, 9787544757225, 9787549567027, 9787550260474, 9787511356949, 9787550257610, 9787549568833, 9787229097042, 9787540775704, 9787508653488, 9787307162525, 9787544277082]
 isbn_array.each do |isbn|
-book = Book.search_douban_by_isbn(isbn)
-		  Book.create!([
-								{title: book["title"], author: book["author"], description: book["summary"], ISBN: book["isbn13"], image: book["image"], YiBoNum: Faker::Number.number(16),location: Location.order("RANDOM()").first }
-								])
+book = Book.search_douban_by_isbn(isbn).save
 end
 Book.create!([{title: Book.first["title"], author: Book.first["author"], description: Book.first["description"], ISBN: Book.first["ISBN"], image: Book.first["image"], location: Location.first }])
 Book.create!([{title: Book.first["title"], author: Book.first["author"], description: Book.first["description"], ISBN: Book.first["ISBN"], image: Book.first["image"], location: Location.second }])
