@@ -1,7 +1,6 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy, :checkIn, :checkOut, :checkingOut]
-  before_action :set_user, only: [:registerBook, :checkOut, :checkingOut, :checkIn]
-  /before_action :set_new_book, only: [:new, :registerBook]/
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :checkingIn, :checkingOut]
+  before_action :set_user, only: [ :checkingIn, :checkingOut,]
   before_filter :authorize
 
   ##scope :distinct_book, { where("DISTINCT ISBN") }
@@ -42,22 +41,14 @@ class BooksController < ApplicationController
 
   /check in and check out /
   def checking 
+      @book = Book.find_by(YiBoNum: params["YiBoNum"])
+      @user = User.find_by(YiBoID: params[:YiBoID])
+      if @book && @book.user
+        @user = @book.user
+      end
   end
 
-  def checking_choose
-    @book = Book.find_by(YiBoNum: params[:YiBoNum])
-	 if @book
-	 	 if @book.user_id
-		 	redirect_to check_in_path(@book)
-		 else
-		   redirect_to check_out_path(@book)
-	    end
-	 else
-	 	flash[:notice] = "书不存在"
-	 end
-  end
-
-  def checkIn
+  def checkingIn
     @book.update!(user_id: nil)
 
     flash[:notice] = "#{@user.name}已经将#{@book.title}归还"
@@ -65,13 +56,10 @@ class BooksController < ApplicationController
   end
 
   def checkingOut
-    p @user.id
     @book.update(user_id: @user.id)
-    flash[:notice] = "图书已经借出"
-    redirect_to checking_book_path
-  end
 
-  def checkOut
+    flash[:notice] = "图书已经被#{@user.name}借出"
+    redirect_to checking_book_path
   end
 
 
@@ -123,13 +111,9 @@ class BooksController < ApplicationController
       end
     end
 
-    /def set_new_book
-      @newBook = Book.search_douban_by_isbn(params[:isbn]) if params[:isbn]
-    end/
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :author, :image, :description, :ISBN, :user_id, :location_id)
+      params.require(:book).permit(:title, :author, :image, :description, :ISBN, :user_id, :location_id, :YiBoNum)
     end
 	 
 	 def logged_in_user

@@ -1,0 +1,18 @@
+<h3>用户信息</h3>
+<ul>
+	<li>
+		<p>姓名: <%= @user.name%></p>
+	</li>
+	<li>
+		<p>身份证: <%= @user.GovID%></p>
+	</li>
+	<li>
+		<p>地址: <%= @user.address%></p>
+	</li>
+	<li>
+		<p>剩余借阅权限: <%= @user.AuthNum - @user.books.count%></p>
+	</li>
+	<li>
+		<p>电子邮箱: <%= @user.email%></p>
+	</li>
+</ul>

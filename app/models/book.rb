@@ -19,7 +19,7 @@ class Book < ActiveRecord::Base
     rawBook = get(add, query: {fields: "title,author,summary,isbn13,image,msg"})
 
     if rawBook['msg'].nil?
-      book = Book.new(title: rawBook['title'], author: rawBook['author'], description: rawBook['summary'], ISBN: rawBook['isbn13'], image: rawBook['image'])
+      book = Book.new(title: rawBook['title'], author: rawBook['author'], description: rawBook['summary'], ISBN: rawBook['isbn13'], image: rawBook['image'], YiBoNum: rawBook['isbn13'])
     else
       book = Book.new(title: "null")
     end
