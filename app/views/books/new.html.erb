@@ -1,45 +1,14 @@
-<h1 class="header">录入新书</h1>
+<h1 id="header" class="header">录入新书</h1>
 
 <p><%= flash[:notice]%></p>
 
 <form>
   <legend>ISBN码</legend>
   <div>
-    <input type='search' value='<%= params[:isbn] %>' name='isbn' placeholder='请输入ISBN码'>
+	<input type='text' class='form-control' value='<%= params[:isbn] %>' name='isbn' placeholder='isbn' >
   </div>
 </form>
 
 <%= link_to 'Back', books_path %>
 
-
-
-<% if @newBook %>
-<% if @newBook["title"] %>
-	<%# Display the book here and let the admin to decide whether to add the book to system%>
-	<table>
-		<thead>
-			<tr>
-				<th>image</th>
-				<th>标题</th>
-				<th>作者</th>
-				<th>ISBN码</th>
-				<th>内容简介</th>
-			</tr>
-		</thead>
-
-		<tbody>
-			<tr>
-				<td><%= image_tag @newBook["image"] %></td>
-				<td><%= @newBook["title"] %></td>
-				<td><%= @newBook["author"] %></td>
-				<td><%= @newBook["isbn13"] %></td>
-				<td><%= @newBook["summary"]%></td>
-			</tr>
-		</tbody>
-	</table>
-
-	<p><%= link_to "确认加入书库", registering_book_path(params[:isbn]), data: {confirm: "#{@newBook["title"]}将会加入书库"} %></p>
-<% elsif @newBook["msg"] %>
-	<p>书目不存在</p>
-<% end %>
-<% end %>
+<p><%= render 'form' %></p>

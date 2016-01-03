@@ -16,7 +16,13 @@ class Book < ActiveRecord::Base
 
   def self.search_douban_by_isbn term
 		add = "/isbn/#{term}"
-    get(add, query: {fields: "title,author,summary,isbn13,image,msg"})
+    rawBook = get(add, query: {fields: "title,author,summary,isbn13,image,msg"})
+
+    if rawBook['msg'].nil?
+      book = Book.new(title: rawBook['title'], author: rawBook['author'], description: rawBook['summary'], ISBN: rawBook['isbn13'], image: rawBook['image'])
+    else
+      book = Book.new(title: "null")
+    end
   end
 
 	protected

@@ -10,6 +10,15 @@
       </ul>
     </div>
   <% end %>
+  <% if @book.image %>
+    <div class="field">
+      <%= image_tag @book.image %>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :图片链接 %><br>
+    <%= f.text_field :image %>
+  </div>
 
   <div class="field">
     <%= f.label :书名 %><br>
@@ -27,10 +36,7 @@
     <%= f.label :ISBN码 %><br>
     <%= f.text_field :ISBN %>
   </div>
-  <div class="field">
-    <%= f.label :图片 %><br>
-    <%= f.number_field :image %>
-  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy, :checkIn, :checkOut, :checkingOut]
   before_action :set_user, only: [:registerBook, :checkOut, :checkingOut, :checkIn]
-  before_action :set_new_book, only: [:new, :registerBook]
+  /before_action :set_new_book, only: [:new, :registerBook]/
   before_filter :authorize
 
   ##scope :distinct_book, { where("DISTINCT ISBN") }
@@ -25,10 +25,15 @@ class BooksController < ApplicationController
   end
 
   def new
+    if params[:isbn]
+      @book = Book.search_douban_by_isbn(params[:isbn])
+    else
+      @book = Book.new
+    end
   end
 
   def show
-    @user = @book.user 
+    /@user = @book.user /
   end
 
   def edit
@@ -69,19 +74,13 @@ class BooksController < ApplicationController
   def checkOut
   end
 
-  /new book method/
-  def registerBook
-    @brandNewBook = Book.create({title: @newBook["title"], author: @newBook["author"], description: @newBook["summary"], ISBN: @newBook["isbn13"], image: @newBook["image"]})
-    flash[:notice] = "#{@newBook["title"]}已经入库。"
-    redirect_to new_path
-  end
 
   def create
     @book = Book.new(book_params)
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, notice: 'User was successfully created.' }
+        format.html { redirect_to new_path, notice: '#{@book} 已经被加入书库' }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }
@@ -92,12 +91,12 @@ class BooksController < ApplicationController
 
     def update
     respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: '用户资料已被更新' }
-        format.json { render :show, status: :ok, location: @user }
+      if @book.update(book_params)
+        format.html { redirect_to @book, notice: '书目信息已被更新' }
+        format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
     end
@@ -124,13 +123,13 @@ class BooksController < ApplicationController
       end
     end
 
-    def set_new_book
+    /def set_new_book
       @newBook = Book.search_douban_by_isbn(params[:isbn]) if params[:isbn]
-    end
+    end/
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :author, :description, :ISBN, :user_id)
+      params.require(:book).permit(:title, :author, :image, :description, :ISBN, :user_id, :location_id)
     end
 	 
 	 def logged_in_user
