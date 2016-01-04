@@ -41,7 +41,7 @@ class BooksController < ApplicationController
 
   /check in and check out /
   def checking 
-      @book = Book.find_by(YiBoNum: params["YiBoNum"])
+      @book = Book.find_by(YiBoNum: params[:YiBoNum])
       @user = User.find_by(YiBoID: params[:YiBoID])
       if @book && @book.user
         @user = @book.user
@@ -113,7 +113,7 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :author, :image, :description, :ISBN, :user_id, :location_id, :YiBoNum)
+      params.require(:book).permit(:title, :author, :image, :description, :ISBN, :user_id, :location_id)
     end
 	 
 	 def logged_in_user

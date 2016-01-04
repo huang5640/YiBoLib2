@@ -15,6 +15,9 @@
      <%= link_to "书库列表", books_path%>
 	  <%= link_to "用户名单", users_path%>
 	  <% end %>
-      <%= yield %>
+
+    <div id="loading">Loading...</div>
+
+    <%= yield %>
 </body>
 </html>

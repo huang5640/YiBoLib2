@@ -15,3 +15,11 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).on('page:fetch', function() {
+$('#loading').show();
+});
+
+$(document).on('page:fetch', function() {
+$('#loading').show();
+});

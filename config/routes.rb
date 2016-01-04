@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   get "books/:id/" => "books#show"
   get "books/:id/checkingIn" => "books#checkingIn", as: 'checkingIn_in'
   get "books/:id/checkOut/:YiBoID" => "books#checkingOut", as: 'checking_out'
-  get "books/new/register/:isbn" => "books#registerBook", as: 'registering_book'
   get "checking" => "books#checking", as: 'checking_book'
 
   get '/login' => 'sessions#new'

@@ -13,6 +13,8 @@ group :development, :test do
 	gem 'sqlite3'
 end
 
+gem 'dalli'
+
 group :production do
 	gem 'pg'
 	gem 'rails_12factor'
