@@ -1,17 +1,20 @@
 <h1>借还</h1>
-<form>
 	<p><%= flash[:notice]%></p>
-		<form>
-		<div>
-			<p>益博码</p>
-			<input type='text' value='<%= params[:YiBoNum]%>' name = 'YiBoNum' placeholder='请输入益博码'/>
+	<form class="form-horizontal">
+		<div >
+			<label for='search-YiBoNum'>益博码</label>
+			<input type='text' id='search-YiBoNum'value='<%= params[:YiBoNum]%>' name = 'YiBoNum' placeholder='请输入益博码'/>
 		</div>
+		<br>
 		<div>
-			<p>用户ID</p>
+			<label>用户ID</label>
 			<input type='text' value='<%= params[:YiBoID]%>' name = 'YiBoID' placeholder='请输入用户ID'/>
 		</div>
-		<input type='submit' name='confirm' value='确认'/>
-		</form>
+		
+		<div>
+			<input type='submit' name='confirm' value='确认'/>
+		</div>
+	</form>
 
 	<% if @book %>
 		<%= render 'book'%>
@@ -27,4 +30,3 @@
 			 <p><%= link_to "确认借阅", checking_out_path({id: @book.id, YiBoID: @user.YiBoID}), data: {confirm: "#{@user.name}将会借走#{@book.title}"} %></p>
 	<% end %>
 	<%= link_to "Back", books_path %>
-</form>
