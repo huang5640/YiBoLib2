@@ -18,7 +18,7 @@
         <td><%= image_tag book.image %></td>
         <td><%= book.title %></td>
         <td><%= book.author %></td>
-        <td><%= book.description %></td>
+        <td><%= book.description[0, 200] %><a class="detail">...详细</a></td>
         <td><%= link_to "编辑", edit_book_path(book) %></td>
 
         <% if book.user%>
