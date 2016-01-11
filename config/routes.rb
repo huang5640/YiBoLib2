@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get "books/new" => 'books#new', as: 'new'
   get "books/:id/edit" => 'books#edit'
   get "books/:id/" => "books#show"
-  get "books/:id/checkingIn" => "books#checkingIn", as: 'checkingIn_in'
+  get "books/:id/checkingIn" => "books#checkingIn", as: 'checking_in'
   get "books/:id/checkOut/:YiBoID" => "books#checkingOut", as: 'checking_out'
   get "checking" => "books#checking", as: 'checking_book'
 
