@@ -23,7 +23,7 @@
 	</form>
 
 	<% if @book %>
-		<%= render 'book'%>
+		<%= render partial: 'book', locals: {book: @book} %>
 	<% end %>
 
 	<% if @user%>

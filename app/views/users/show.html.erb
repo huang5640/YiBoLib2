@@ -27,9 +27,12 @@
 
 <p>
   <strong>已借:</strong>
-  <%= @user.books.each do |book| %>
-    <%= link_to book.title, book_path(book) %>
-  <% end %>  
+  <% if @user.books %>
+
+    <%= render partial: 'books/book', collection: @user.books, as: @book%>
+  <% else %>
+    <p>None</p>
+  <% end %>
 </p>
 
 <%= link_to '编辑', edit_user_path(@user) %> |
