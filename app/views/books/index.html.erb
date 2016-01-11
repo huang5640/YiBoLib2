@@ -24,7 +24,7 @@
         <div>
           <legend>根据图书馆分类</legend>
           <% @locations.each do |location|%>
-            <%= link_to location.name, books_path(location_id: location.id)%>
+            <input type="checkbox"><%= location.name %></input>
           <% end %>
         </div>
       </p>
