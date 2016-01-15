@@ -2,17 +2,19 @@
 <p><%= flash[:notice]%></p>
 <form class="form-horizontal">
 	<div class="form-group">
+	   	<label class="col-sm-2 control-label">用户ID</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" placeholder="请输入用户ID" name="YiBoID" value='<%= params[:YiBoID]%>' size='30'/>
+	    </div>
+	</div>
+	
+	<div class="form-group">
 	    <label class="col-sm-2 control-label">益博码</label>
 	    <div class="col-sm-10">
 	      <input type="text" class="form-control" placeholder="请输入益博码" name="YiBoNum" value='<%= params[:YiBoNum]%>'/>
 	    </div>
 	</div>
-	<div class="form-group">
-	   	<label class="col-sm-2 control-label">用户ID</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" placeholder="请输入用户ID" name="YiBoID" value='<%= params[:YiBoID]%>'/>
-	    </div>
-	</div>
+	
 	<div class="form-group">
 	    <div class="col-sm-offset-2 col-sm-10">
 	      <button type="submit" class="btn btn-default">确认</button>
@@ -22,13 +24,22 @@
 
 </form>
 
-<% if @book %>
-	<%= render partial: 'book', locals: {book: @book} %>
-<% end %>
 
-<% if @user%>
-	<%= render :partial => 'users/user'%>
-<% end %>
+<div class="user-books-section">
+	<div class="user-section">
+		<% if @user%>
+			<%= render :partial => 'users/user'%>
+		<% end %>
+	</div>
+
+	<div class="book-section">
+		<% if @book %>
+			<%= render partial: 'book_block', locals: {book: @book}%>
+			<%= render partial: 'book_block', locals: {book: @book}%>
+
+		<% end %>
+	</div>
+</div>
 
 <div>
 	<% if @book && @book.user%>
