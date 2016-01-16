@@ -2,6 +2,7 @@ class Book < ActiveRecord::Base
 	include HTTParty
 	belongs_to :user
 	belongs_to :location
+  has_and_belongs_to_many :checkings
 
 	validates :YiBoNum, uniqueness: true
 

@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 	has_many :books
+	has_many :checkings
 	has_one :manager
+
     has_secure_password
     serialize :auth_locations, Array
   

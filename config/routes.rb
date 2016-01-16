@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :checkings
+  resources :checkings
+  resources :checkings
   resources :locations
   get 'sessions/new'
 

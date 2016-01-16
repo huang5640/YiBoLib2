@@ -29,7 +29,7 @@
   <strong>已借:</strong>
   <% if @user.books %>
 
-    <%= render partial: 'books/book', collection: @user.books, as: @book%>
+    <%= render partial: 'books/book_block', collection: @user.books, as: :book%>
   <% else %>
     <p>None</p>
   <% end %>
