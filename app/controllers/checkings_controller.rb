@@ -15,10 +15,22 @@ class CheckingsController < ApplicationController
 
   # GET /checkings/new
   def new
-	 @books = []
-    @checking = Checking.new(user: User.find_by(YiBoID: params[:YiBoID]))
-	 
-	 
+	 @user = User.find_by(YiBoID: params[:YiBoID])
+	 @books = @user.books
+    @checking = Checking.new(user: @user)
+  end
+  
+  def checking
+    if @checking.status == "in"
+	   @checking.books.first.update!(user_id: nil)
+		flash[:notice] ="#{@checking.user.name}已经将#{@checking.books.first.title}归还"
+	 elsif @checking.status == "out"
+	 	@checking.books.each do |book|
+		  book.update(user_id: @checking.user.id)
+		end
+	   flash[:notice] = "图书已经被#{@checking.user.name}借出"	  
+	 end
+	 redirect_to new_checking_path
   end
 
   # GET /checkings/1/edit

@@ -1,7 +1,3 @@
-<h1>New Checking</h1>
-
-<%= render 'form' %>
-
 <h1>借还</h1>
 <p><%= flash[:notice]%></p>
 <form class="form-horizontal">
@@ -47,9 +43,9 @@
 
 <div>
 	<% if @book && @book.user%>
-		<%= button_to "归还图书", checking_in_path({id: @book.id, YiBoID: @user.YiBoID}), method: :get, class: "btn btn-primary" %>
+		<%= button_to "归还图书", choose_checking_path({checking: @checking}), method: :get, class: "btn btn-primary" %>
 	<% elsif @book && @user %>
-		<%= button_to "确认借阅", checking_out_path({id: @book.id, YiBoID: @user.YiBoID}), method: :get, data: {confirm: "#{@user.name}将会借走#{@book.title}"}, class: "btn btn-primary"%>
+		<%= button_to "确认借阅", choose_checking_path({checking: @checking}), method: :get, data: {confirm: "#{@user.name}将会借走#{@book.title}"}, class: "btn btn-primary"%>
 	<% end %>
 	<a class="btn btn-default" href="/books" role="button">回到主页</a>
 </div>
