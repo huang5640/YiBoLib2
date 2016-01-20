@@ -43,6 +43,9 @@ class BooksController < ApplicationController
   def checking 
       @book = Book.find_by(YiBoNum: params[:YiBoNum])
       @user = User.find_by(YiBoID: params[:YiBoID])
+      if @user && @user.books
+        @borrowed_books = @user.books
+      end
       if @book && @book.user
         @user = @book.user
       end
@@ -51,7 +54,7 @@ class BooksController < ApplicationController
   def checkingIn
     @book.update!(user_id: nil)
 
-    flash[:notice] = "#{@user.name}已经将#{@book.title}归还"
+    flash[:notice] = "#{@user.name}已经将《#{@book.title}》归还"
     redirect_to checking_book_path
   end
 
@@ -68,7 +71,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to new_path, notice: '#{@book} 已经被加入书库' }
+        format.html { redirect_to new_path, notice: "《#{@book.title}》已经被加入书库" }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }

@@ -37,8 +37,11 @@ class Book < ActiveRecord::Base
     end
 
 	 def set_YiBoNum
-	 	if self.YiBoNum.nil?
-			self.YiBoNum = rand(9999999999) 
+	 	while self.YiBoNum == ""
+			num = rand(9999999999)
+      if (Book.find_by(YiBoNum: num).nil?)
+        self.YiBoNum = num
+      end 
 		end
 	 end
 end
