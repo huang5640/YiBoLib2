@@ -43,7 +43,7 @@ class BooksController < ApplicationController
   def checking 
       @book = Book.find_by(YiBoNum: params[:YiBoNum])
       @user = User.find_by(YiBoID: params[:YiBoID])
-      if @user && @user.books
+      if @user && @user.books.count != 0
         @borrowed_books = @user.books
       end
       if @book && @book.user
