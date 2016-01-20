@@ -3,8 +3,6 @@ class Book < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :location
 
-	validates :YiBoNum, uniqueness: true
-
 	scope :search, ->(keyword) { where('keywords LIKE ?', "%#{keyword.downcase}%") if keyword.present? }
 	scope :search_by_isbn, ->(isbn) {where('ISBN LIKE ?', "#{isbn}%") if isbn.present? }
   scope :filter_by_location, ->(location_id) {where("location_id = #{location_id}") if location_id.present?}
