@@ -28,7 +28,7 @@
 <div class="user-books-section">
 	<div class="user-section">
 		<% if @user%>
-			<%= render :partial => 'users/user'%>
+			<%= render :partial => 'users/user', locals: {user: @user}%>
 		<% end %>
 	</div>
 

@@ -4,8 +4,6 @@ class Book < ActiveRecord::Base
 	belongs_to :location
   has_and_belongs_to_many :checkings
 
-	validates :YiBoNum, uniqueness: true
-
 	scope :search, ->(keyword) { where('keywords LIKE ?', "%#{keyword.downcase}%") if keyword.present? }
 	scope :search_by_isbn, ->(isbn) {where('ISBN LIKE ?', "#{isbn}%") if isbn.present? }
   scope :filter_by_location, ->(location_id) {where("location_id = #{location_id}") if location_id.present?}
@@ -33,13 +31,15 @@ class Book < ActiveRecord::Base
 	protected
     def set_keywords
     	word = [title, author, description].join(' ')
-    	#isbn = [Book.ISBN]
       self.keywords = word
     end
 
 	 def set_YiBoNum
-	 	if self.YiBoNum.nil?
-			self.YiBoNum = rand(9999999999) 
+	 	while self.YiBoNum == "" do
+			num = rand(9999999999)
+			if Book.find_by(YiBoNum: num).nil?
+				self.YiBoNum = num	
+			end
 		end
 	 end
 end

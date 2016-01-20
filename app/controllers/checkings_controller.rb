@@ -1,5 +1,6 @@
 class CheckingsController < ApplicationController
   before_action :set_checking, only: [:show, :edit, :update, :destroy]
+  include SessionsHelper
 
   # GET /checkings
   # GET /checkings.json
@@ -14,7 +15,10 @@ class CheckingsController < ApplicationController
 
   # GET /checkings/new
   def new
-    @checking = Checking.new
+	 @books = []
+    @checking = Checking.new(user: User.find_by(YiBoID: params[:YiBoID]))
+	 
+	 
   end
 
   # GET /checkings/1/edit

@@ -68,7 +68,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to new_path, notice: '#{@book} 已经被加入书库' }
+        format.html { redirect_to new_path, notice: "《#{@book.title}》已经被加入书库" }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }

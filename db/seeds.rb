@@ -8,6 +8,7 @@
 
 Book.destroy_all
 User.destroy_all
+Manager.destroy_all
 Location.destroy_all
 
 Location.create!([

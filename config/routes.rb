@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
-  resources :checkings
-  resources :checkings
-  resources :checkings
   resources :locations
   get 'sessions/new'
 
   resources :users
   resources :books
+  resources :checkings
+
   get "books/index" => 'books#index'
   get "books/new" => 'books#new', as: 'new'
   get "books/:id/edit" => 'books#edit'

@@ -2,4 +2,58 @@
 
 <%= render 'form' %>
 
+<h1>借还</h1>
+<p><%= flash[:notice]%></p>
+<form class="form-horizontal">
+	<div class="form-group">
+	   	<label class="col-sm-2 control-label">用户ID</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" placeholder="请输入用户ID" name="YiBoID" value='<%= params[:YiBoID]%>' size='30'/>
+	    </div>
+	</div>
+	
+	<div class="form-group">
+	    <label class="col-sm-2 control-label">益博码</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" placeholder="请输入益博码" name="YiBoNum" value='<%= params[:YiBoNum]%>'/>
+	    </div>
+	</div>
+	
+	<div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-10">
+	      <button type="submit" class="btn btn-default">确认</button>
+	    </div>
+	</div>
+
+
+</form>
+
+
+<div class="user-books-section">
+	<div class="user-section">
+		<% if @checking.user%>
+			<%= render :partial => 'users/user', locals: {user: @checking.user}%>
+		<% end %>
+	</div>
+
+	<div class="book-section">
+		<% book = Book.find_by(YiBoNum: params[:YiBoNum]) %>
+		<% if book  %>
+			<%= render partial: 'books/book_block', locals: {book: book}%>
+
+		<% end %>
+	</div>
+</div>
+
+<div>
+	<% if @book && @book.user%>
+		<%= button_to "归还图书", checking_in_path({id: @book.id, YiBoID: @user.YiBoID}), method: :get, class: "btn btn-primary" %>
+	<% elsif @book && @user %>
+		<%= button_to "确认借阅", checking_out_path({id: @book.id, YiBoID: @user.YiBoID}), method: :get, data: {confirm: "#{@user.name}将会借走#{@book.title}"}, class: "btn btn-primary"%>
+	<% end %>
+	<a class="btn btn-default" href="/books" role="button">回到主页</a>
+</div>
+
+
+
 <%= link_to 'Back', checkings_path %>
