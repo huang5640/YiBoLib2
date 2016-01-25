@@ -2,10 +2,7 @@ class Book < ActiveRecord::Base
 	include HTTParty
 	belongs_to :user
 	belongs_to :location
-<<<<<<< HEAD
-=======
    has_and_belongs_to_many :checkings
->>>>>>> experiment
 
 	scope :search, ->(keyword) { where('keywords LIKE ?', "%#{keyword.downcase}%") if keyword.present? }
 	scope :search_by_isbn, ->(isbn) {where('ISBN LIKE ?', "#{isbn}%") if isbn.present? }
@@ -38,19 +35,11 @@ class Book < ActiveRecord::Base
     end
 
 	 def set_YiBoNum
-<<<<<<< HEAD
-	 	while self.YiBoNum == "" || self.YiBoNum.nil?
-			num = rand(9999999999)
-      if (Book.find_by(YiBoNum: num).nil?)
-        self.YiBoNum = num
-      end 
-=======
 	 	while self.YiBoNum == ""  || self.YiBoNum.nil? do
 			num = rand(9999999999)
 			if Book.find_by(YiBoNum: num).nil?
 				self.YiBoNum = num	
 			end
->>>>>>> experiment
 		end
 	 end
 end
