@@ -27,29 +27,43 @@
 
 <div class="user-books-section">
 	<div class="user-section">
-		<% if @checking.user%>
-			<%= render :partial => 'users/user', locals: {user: @checking.user}%>
+		<% if @user%>
+			<%= render :partial => 'users/user', locals: {user: @user}%>
+			<% if @user.books %>
+				<% @user.books.each do |book| %>
+					<%= render :partial => 'books/book_block', locals: {book: book} %>
+				<% end %>
+			<% end %>
 		<% end %>
 	</div>
 
 	<div class="book-section">
-		<% book = Book.find_by(YiBoNum: params[:YiBoNum]) %>
-		<% if book  %>
-			<%= render partial: 'books/book_block', locals: {book: book}%>
-
+		<% if @book  %>
+			<%= render partial: 'books/book_block', locals: {book: @book}%>
 		<% end %>
 	</div>
 </div>
 
 <div>
-	<% if @book && @book.user%>
-		<%= button_to "归还图书", choose_checking_path({checking: @checking}), method: :get, class: "btn btn-primary" %>
+	<% if @book && @book.user == @user%>
+		<%= button_to "归还图书", 
+		choose_checking_path({:book_id => @book.id, :user_id => @user.id, :status => 'in'}), 
+		action: "create",
+		class: "btn btn-primary" %>
 	<% elsif @book && @user %>
-		<%= button_to "确认借阅", choose_checking_path({checking: @checking}), method: :get, data: {confirm: "#{@user.name}将会借走#{@book.title}"}, class: "btn btn-primary"%>
+		<%= button_to "确认借阅", 
+		choose_checking_path({:book_id => @book.id, :user_id => @user.id, :status => 'out'}), 
+
+		data: {confirm: "#{@user.name}将会借走#{@book.title}"}, class: "btn btn-primary" %>
 	<% end %>
-	<a class="btn btn-default" href="/books" role="button">回到主页</a>
 </div>
 
+<br>
 
+<div>
+	<a class="btn btn-default" href="/checkings" role="button">历史记录</a>
+<div>
 
-<%= link_to 'Back', checkings_path %>
+<div>
+	<a class="btn btn-default" href="/books" role="button">回到主页</a>
+<div>

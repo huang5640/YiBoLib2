@@ -15,22 +15,38 @@ class CheckingsController < ApplicationController
 
   # GET /checkings/new
   def new
-	 @user = User.find_by(YiBoID: params[:YiBoID])
-	 @books = @user.books
-    @checking = Checking.new(user: @user)
+  	 @books = []
+  	 @user = User.find_by(YiBoID: params[:YiBoID])
+  	 #if user params exist
+  	 if (@user && @user.books) 
+        @user.books.each do |book|
+  		    @books << book
+  		  end
+  	 end
+
+  	 if(params[:YiBoNum])
+  	 	@book = Book.find_by(YiBoNum: params[:YiBoNum])
+  	 end
+
   end
   
   def checking
+    @checking = Checking.create(:status => params[:status], :user_id => params[:user_id])
+    book = Book.find(params[:book_id])
+    @checking.books << book
+    @checking.save
+
     if @checking.status == "in"
-	   @checking.books.first.update!(user_id: nil)
-		flash[:notice] ="#{@checking.user.name}已经将#{@checking.books.first.title}归还"
-	 elsif @checking.status == "out"
-	 	@checking.books.each do |book|
-		  book.update(user_id: @checking.user.id)
-		end
-	   flash[:notice] = "图书已经被#{@checking.user.name}借出"	  
-	 end
-	 redirect_to new_checking_path
+      book.update!(user_id: nil)
+      flash[:notice] ="#{@checking.user.name}已经将#{book.title}归还"
+    elsif @checking.status == "out"
+      book.update!(user_id: params[:user_id])
+      flash[:notice] = "图书已经被#{@checking.user.name}借出" 
+    end
+    
+    
+
+	  redirect_to new_checking_path
   end
 
   # GET /checkings/1/edit
@@ -39,18 +55,34 @@ class CheckingsController < ApplicationController
 
   # POST /checkings
   # POST /checkings.json
-  def create
-    @checking = Checking.new(checking_params)
+  # def create
+  #   @checking = Checking.new(checking_params)
 
-    respond_to do |format|
-      if @checking.save
-        format.html { redirect_to @checking, notice: 'Checking was successfully created.' }
-        format.json { render :show, status: :created, location: @checking }
-      else
-        format.html { render :new }
-        format.json { render json: @checking.errors, status: :unprocessable_entity }
+  #   respond_to do |format|
+  #     if @checking.save
+  #       format.html { redirect_to "new", notice: 'Checking was successfully created.' }
+  #       format.json { render :show, status: :created, location: @checking }
+  #     else
+  #       format.html { render :new }
+  #       format.json { render json: @checking.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+
+  def create
+    @checking = Checking.create(checking_params)
+    @checking.save
+
+    if @checking.status == "in"
+      @checking.books.first.update!(user_id: nil)
+      flash[:notice] ="#{@checking.user.name}已经将#{@checking.books.first.title}归还"
+    elsif @checking.status == "out"
+      @checking.books.each do |book|
+        book.update(user_id: @checking.user.id)
       end
     end
+
+    flash[:notice] = "图书已经被#{@checking.user.name}借出" 
   end
 
   # PATCH/PUT /checkings/1
@@ -85,6 +117,6 @@ class CheckingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def checking_params
-      params[:checking]
+      params[:checking].require(:checking).permit(:user_id, :book, :status)
     end
 end

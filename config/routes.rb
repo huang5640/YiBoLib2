@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   delete '/logout' => 'sessions#destroy'
 
   
-  get 'checkings/:id/checking' => 'checkings#checking', as: 'choose_checking'
+  post 'checkings/choose_checking' => 'checkings#checking', as: 'choose_checking'
 
   root "sessions#new"
   # The priority is based upon order of creation: first created -> highest priority.
