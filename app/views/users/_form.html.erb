@@ -1,6 +1,9 @@
-<%= form_for(@user) do |f| %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+<%= form_for @user, html: {class: "form-horizontal"}  do |f| %>
   <% if @user.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="form-group">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
       <ul>
@@ -11,32 +14,54 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :姓名 %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :益博码 %><br>
-    <%= f.text_field :YiBoID %>
-  </div>
-  <div class="field">
-    <%= f.label :身份证号 %><br>
-    <%= f.text_field :GovID %>
-  </div>
-  <div class="field">
-    <%= f.label :地址 %><br>
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :权限 %><br>
-    <%= f.number_field :AuthNum %>
-  </div>
-  <div class="field">
-    <%= f.label :密码 %><br>
-    <%= f.text_field :password%>
+  <div class="form-group">
+    <%= f.label :姓名, class: "col-sm-2 control-label"%>
+    <div class="col-sm-10">
+      <%= f.text_field :name, class: "form-control"%>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.label :益博码, class: "col-sm-2 control-label"%>
+    <div class="col-sm-10">
+      <%= f.text_field :YiBoID, class: "form-control"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :身份证号, class: "col-sm-2 control-label"%>
+    <div class="col-sm-10">
+      <%= f.text_field :GovID, class: "form-control"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :地址, class: "col-sm-2 control-label"%>
+    <div class="col-sm-10">
+      <%= f.text_field :address, class: "form-control"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :权限, class: "col-sm-2 control-label"%>
+    <div class="col-sm-10">
+      <%= f.number_field :AuthNum, class: "form-control"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :密码, class: "col-sm-2 control-label"%>
+    <div class="col-sm-10">
+      <%= f.text_field :password, class: "form-control"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-default">确认</button>
+        </div>
   </div>
 <% end %>
+
+  </div>
+</div>

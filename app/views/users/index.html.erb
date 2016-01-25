@@ -4,7 +4,7 @@
 
 <%= will_paginate%>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>益博ID</th>
@@ -36,5 +36,7 @@
 
 <%= will_paginate%>
 
-<%= link_to "新增用户", new_user_path %>
-<%= link_to "返回主页", books_path %>
+<div>
+  <a class="btn btn-primary" href="/users/new" role="button">新增用户</a>
+  <a class="btn btn-default" href="/books" role="button">返回主页</a>
+<div>

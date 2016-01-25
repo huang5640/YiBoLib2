@@ -68,7 +68,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to new_path, notice: '#{@book} 已经被加入书库' }
+        format.html { redirect_to new_path, notice: "《#{@book.title}》已经被加入书库" }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }
@@ -77,7 +77,7 @@ class BooksController < ApplicationController
     end
   end
 
-    def update
+  def update
     respond_to do |format|
       if @book.update(book_params)
         format.html { redirect_to @book, notice: '书目信息已被更新' }
@@ -113,7 +113,7 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :author, :image, :description, :ISBN, :user_id, :location_id)
+      params.require(:book).permit(:title, :author, :image, :description, :ISBN, :user_id, :location_id, :YiBoNum)
     end
 	 
 	 def logged_in_user

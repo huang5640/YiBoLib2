@@ -6,3 +6,36 @@
 {
 	color:"red";
 }
+
+.block
+{
+	border-style: solid;
+	border-color: #c2c2d6;
+    border-width: 1px;
+    padding: 5px;
+    width: 25%;
+    height: 250px;
+    float: left;
+}
+
+.user-books-section
+{
+	display: inline;
+}
+
+.user-section
+{
+	border-right-style: dashed;
+	border-color: #9494b8;
+	border-width: 2px;
+	width: 25%;
+	float:left;
+}
+
+.book-section
+{
+	padding: 5px;
+	float:left;
+	width: 75%;
+	display: inline;
+}

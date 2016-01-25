@@ -10,10 +10,13 @@
 	  <% if current_user %>
   登陆用户：<%= current_user.name %> | <%= link_to "注销用户", '/logout', :method => :delete%>
 	  <br>
-	  <%= link_to "借还", checking_book_path%>
-     <%= link_to "录入", new_book_path(params[:location_id])%>
-     <%= link_to "书库列表", books_path%>
-	  <%= link_to "用户名单", users_path%>
+    <ul class="nav nav-tabs">
+      <li role="presentation"><a href="/checking">借还</a></li>
+      <li role="presentation"><a href="/books/new">录入</a></li>
+      <li role="presentation" class="active"><a href="/books">书库列表</a></li>
+      <li role="presentation"><a href="/users">用户列表</a></li>
+	   <li role="presentation"><a href="/checkings/new">借还B</a></li>
+    </ul>
 	  <% end %>
 
     <div id="loading">Loading...</div>
