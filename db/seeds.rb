@@ -10,6 +10,7 @@ Book.destroy_all
 User.destroy_all
 Manager.destroy_all
 Location.destroy_all
+Checking.destroy_all
 
 Location.create!([
 	{name: "益博总馆", address: "1111 yibo rb, zhenxiong", phone: "888888888", manager: 1, open_at: "9:00", close_at: "17:00"},

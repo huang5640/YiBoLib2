@@ -2,8 +2,12 @@ Rails.application.routes.draw do
   resources :locations
   get 'sessions/new'
 
+  get 'checkings/new' => 'checkings#new', as: 'new_checking'
+
   resources :users
   resources :books
+  resources :checkings, except: [:checking, :new]
+
   get "books/index" => 'books#index'
   get "books/new" => 'books#new', as: 'new'
   get "books/:id/edit" => 'books#edit'
@@ -15,6 +19,9 @@ Rails.application.routes.draw do
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
+
+  
+  post 'checkings/choose_checking' => 'checkings#checking', as: 'choose_checking'
 
   root "sessions#new"
   # The priority is based upon order of creation: first created -> highest priority.
