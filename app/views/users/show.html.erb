@@ -35,5 +35,6 @@
   <% end %>
 </p>
 
-<%= link_to '编辑', edit_user_path(@user) %> |
+<%= link_to '借阅历史', user_history_path(@user)%>
+<%= link_to '编辑', edit_user_path(@user) %>
 <%= link_to '返回主页', books_path %>

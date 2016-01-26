@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :history]
   #before_save :encrypt_password
   before_action :correct_user, only: [:edit, :update, :destroy]
   #after_save :clear_password
@@ -18,6 +18,10 @@ class UsersController < ApplicationController
   end
 
   def login
+  end
+
+  def history
+    @checkings = Checking.where(:user_id => @user.id)
   end
 
   # GET /users/new

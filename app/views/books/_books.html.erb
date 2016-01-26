@@ -8,7 +8,7 @@
       <th>内容简介</th>
       <th>操作</th>
       <th>状态</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -20,6 +20,7 @@
         <td><%= book.author %></td>
         <td><%= book.description[0, 200] %><a class="detail">...详细</a></td>
         <td><%= link_to "编辑", edit_book_path(book) %></td>
+        <td><%= link_to '借阅历史', book_history_path(book)%></td>
 
         <% if book.user%>
           <%#<td><%= link_to "借还", check_in_path(book)></td>%>

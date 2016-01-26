@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy, :checkingIn, :checkingOut]
+  before_action :set_book, only: [:history, :show, :edit, :update, :destroy, :checkingIn, :checkingOut]
   before_action :set_user, only: [ :checkingIn, :checkingOut,]
   before_filter :authorize
 
@@ -37,6 +37,10 @@ class BooksController < ApplicationController
 
   def edit
 
+  end
+
+  def history
+    @checkings = @book.checkings
   end
 
   /check in and check out /

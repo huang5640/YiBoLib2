@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get "books/:id/checkingIn" => "books#checkingIn", as: 'checking_in'
   get "books/:id/checkOut/:YiBoID" => "books#checkingOut", as: 'checking_out'
   get "checking" => "books#checking", as: 'checking_book'
+  get "users/:id/history" => "users#history", as: 'user_history'
+  get "books/:id/history" => "books#history", as: 'book_history'
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
