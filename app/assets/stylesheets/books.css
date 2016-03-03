@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap/theme";
+
 .header 
 {
 	color:"red";
@@ -43,4 +47,67 @@
 .highlight
 {
 	color: #c2c2d6;
+}
+
+.horizontal-block
+{
+	padding-bottom: 10px;
+
+}
+
+.outer-layer
+{
+	box-shadow:2px 2px 5px #000;
+	border-color: #8c8c8c;
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 10px;
+
+	height: 180px;
+}
+
+.book
+{
+	height: 180px;
+}
+
+.book-picture
+{
+	padding: 5px;
+}
+
+.picture
+{
+	display: block;
+	box-shadow:0px 0px 10px #000;
+	margin-left: 0px;
+	margin-top: 10px;
+}
+
+.info
+{
+	padding: 10px;
+	padding-top: 20px;
+	border-left: solid;
+	border-right: solid;
+	border-width: 1px;
+}
+
+.title-author
+{
+	font-size: large;
+	font-weight: 900;
+	
+}
+
+.description 
+{
+	padding-top: 10px;
+}
+
+.options
+{
+	position: relative;
+	top:25%;
+	bottom: 25%;
 }

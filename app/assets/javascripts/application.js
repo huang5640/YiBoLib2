@@ -28,4 +28,14 @@ $(document).ready( function() {
 	$('.nav').on('click', 'li', function() {
 		//$(this).hide();
 	});
+
+	$(".dropdown-menu").on('click', 'li', function() {
+		var content = $(this).data("type");
+		var text = $(this).find('a').text() + " ▼";
+ 		var button = $(this).parent().parent().find('button');
+		console.log(text);
+		button.data("type", content);
+		button.text(text);
+
+	});
 });
