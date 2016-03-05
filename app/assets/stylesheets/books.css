@@ -6,9 +6,9 @@
 @import "bootstrap";
 @import "bootstrap/theme";
 
-.header 
+* 
 {
-	color:"red";
+	box-sizing: border-box;
 }
 
 .block
@@ -29,9 +29,9 @@
 
 .user-section
 {
-	border-right-style: dashed;
+	border-style: solid;
 	border-color: #9494b8;
-	border-width: 2px;
+	border-width: 1px;
 	width: 25%;
 	float:left;
 }
@@ -44,11 +44,6 @@
 	display: inline;
 }
 
-.highlight
-{
-	color: #c2c2d6;
-}
-
 .horizontal-block
 {
 	padding-bottom: 10px;
@@ -57,37 +52,28 @@
 
 .outer-layer
 {
-	box-shadow:2px 2px 5px #000;
+	box-shadow:2px 3px 5px #000;
 	border-color: #8c8c8c;
 	border-style: solid;
 	border-width: 2px;
 	border-radius: 10px;
-
-	height: 180px;
+	position: relative;
 }
 
-.book
+.search-bar
 {
-	height: 180px;
+	clear: right;
 }
 
-.book-picture
-{
-	padding: 5px;
-}
-
-.picture
-{
-	display: block;
-	box-shadow:0px 0px 10px #000;
-	margin-left: 0px;
-	margin-top: 10px;
+.book {
+	height: 100%;
+	display: inline-block;
+	vertical-align: top;
+	height: 160px;
 }
 
 .info
 {
-	padding: 10px;
-	padding-top: 20px;
 	border-left: solid;
 	border-right: solid;
 	border-width: 1px;
@@ -97,7 +83,6 @@
 {
 	font-size: large;
 	font-weight: 900;
-	
 }
 
 .description 
@@ -108,6 +93,13 @@
 .options
 {
 	position: relative;
-	top:25%;
-	bottom: 25%;
+	top:20px
+}
+
+.divider
+{
+	border-top: solid;
+	border-width: 1px;
+	border-color: #BCBCCC;
+	margin-bottom: 10px;
 }

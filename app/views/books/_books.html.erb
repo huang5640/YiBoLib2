@@ -1,23 +1,26 @@
 <% @books.each do |book| %>
-  <div class="horizontal-block row">
+  <div class="horizontal-block container">
     <div class="outer-layer row">
-      <div class="book book-picture col-md-2">
-        <img class="picture" src=<%= book.image%> width="100px" height="150px">
+      <div class="book book-picture col-xs-2"> 
+        <div class="picture">
+          <!-- <img src=<%= book.image%> width="100px" height="150px"> -->
+        </div>
       </div>
 
-      <div class="book info col-md-8">
+      <div class="book info col-xs-8">
         <div class="title-author">  
           <h4>《<%= book.title%>》--- <%= book.author.slice(2..-3)%></h4>
         </div>
         <div class="description">
-          <p>简介：<%= book.description.slice(0..200)%>...<a>（详细）</a></p>
+          <p class="word">简介：<%= book.description.slice(0..200)%>...<a>（详细）</a></p>
         </div>
       </div>
 
-      <div class="book options col-md-2">
-        <button class="btn btn-primary btn-block">借阅</button>
-        <button class="btn btn-default btn-block">历史记录</button>
-        <button class="btn btn-danger btn-block">删除</button>
+      <div class="book options col-xs-2">
+        <!-- button_to(name = nil, options = nil, html_options = nil, &block) -->
+        <%= button_to "借阅", book_path(book), method: 'get', remote: true, class: 'btn btn-primary btn-block'%>
+        <%= button_to "历史记录", book_history_path(book), method: 'get', class: 'btn btn-default btn-block'%>
+        <%= button_to "删除", book_path(book), method: 'delete', data: { confirm: "是否确定要删除《#{book.title}》" }, class: 'btn btn-danger btn-block'%>
       </div>
     </div>
   </div>
